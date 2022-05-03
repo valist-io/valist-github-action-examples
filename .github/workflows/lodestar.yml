@@ -10,6 +10,8 @@ jobs:
         with:
           repository: "ChainSafe/lodestar"
           latest: true
+          tarBall: true
+          zipBall: true
           fileName: "*"
       - uses: valist-io/valist-github-action@v2.1.0
         with:

@@ -1,0 +1,21 @@
+on:
+  release:
+    types: [published]
+jobs:
+  archive_ipfs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "TIMESTAMP=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+      - uses: robinraju/release-downloader@v1.3
+        with:
+          repository: "ipfs/go-ipfs"
+          latest: true
+          fileName: "*"
+      - uses: valist-io/valist-github-action@v2
+        with:
+          rpc-url: https://rpc.valist.io/mumbai
+          private-key: ${{ secrets.PRIVATE_KEY }}
+          account: nasdf
+          project: ipfs
+          release: ${{ env.TIMESTAMP }}
+          files: '**'
